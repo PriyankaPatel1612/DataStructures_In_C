@@ -215,13 +215,136 @@ void create()
 
 void insert()
 {
+  int position,n,count=0,i=1;
+  if(start==NULL)
+  {
+    printf("Node is not created, create node first!\n");
+  }
+  else{
+    printf("Enter the value: ");
+    scanf("%d",&n);
+    New=(struct node *)malloc(sizeof(struct node()));
+    New->data=n;
+    New->add=NULL;
+    printf("\nEnter the position: ");
+    scanf("%d",&position);
 
+    if(position==1)
+    {
+      New->add=start;
+      start=New;
+    }
+    else{
+        temp=start;
+        while(temp!=NULL)
+        {
+            count++;
+            temp=temp->add;
+        }
+
+        if(position>count+1)
+        {
+            printf("Invalid Position!\n");
+        }
+        else if(position==count+1)
+        {
+            temp=start;
+            while(temp->add!=NULL)
+            {
+              temp=temp->add;
+            }
+            temp=New->add;
+        }
+        else{
+            next=start;
+            while(i<position)
+            {
+                prev=next;
+                next=next->add;
+                i++;
+            }
+            prev->add=New;
+            New->add=next;
+        }
+    }
+  }
 }
+
 void display()
 {
-
+  if(start==NULL)
+  {
+    printf("List is not created, create list first!\n");
+  }
+  else
+  {
+   temp=start;
+   while(temp!=NULL)
+   {
+    printf("%d\t\n",temp->data);
+    temp=temp->add;
+   }
+  }
 }
+
+
 void Delete()
 {
+    int position,count=0,i=1;
+  if(start==NULL)
+  {
+    printf("\nList is not created, create list first!");
+  }
+  else
+  {
+    printf("Enter the position: ");
+    scanf("%d",&position);
 
+    if(position==1)
+    {
+        temp=start;
+        start=start->add;
+        printf("Deleted data=%d \n", temp->data);
+        free(temp);
+    }
+    else{
+        temp=start;
+        while(temp!=NULL)
+        {
+            count++;
+            temp=temp->add;
+        }
+        if(position>count)
+        {
+            printf("\nInvalid choice!");
+        }
+        else if(position==count)
+        {
+            next=start;
+            while(next->add!=NULL)
+            {
+                prev=next;
+                next=next->add;
+            }
+            printf("Deleted data=%d \n", next->data);
+            free(next);
+            prev->add=NULL;
+        }
+        else
+        {
+            next=start;
+            while(i<position)
+            {
+                prev=next;
+                next=next->add;
+                i++;
+            }
+            temp=next;
+            next=next->add;
+            printf("Deleted data=%d \n", temp->data);
+            free(temp);
+            prev->add=next;
+        }
+    }
+  }
 }
