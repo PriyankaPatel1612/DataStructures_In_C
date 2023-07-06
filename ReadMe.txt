@@ -1,4 +1,5 @@
-<h1>Data Structures</h1>
+Data Structure using C
+
 checkout branches for practiced programs.. 
 
 
